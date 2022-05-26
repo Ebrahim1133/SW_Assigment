@@ -1,4 +1,4 @@
-<h1> SoftWare Assigment </h1>
+<h1> Software Assigment </h1>
 
 <h2> Description </h2>
 
