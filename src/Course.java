@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 
 import Gateways.EmailGateway;
+import Gateways.SMSGateway;
 import Messages.TaskAddedEmailMessage;
+import Messages.TaskAddedMobileMessage;
 import Users.Professor;
 import Users.Student;
 import Users.TA;
@@ -91,33 +93,82 @@ public class Course {
 		
 		notifyAllUsers(placeholders);
 	}
+
+	public void AddExam(String examName, String examBody) {
+		announcements.add(examName);
+		String[] placeholders = new String[] {examName, examBody};
+		// do some logic here
+
+		notifyAllUsers(placeholders);
+	}
+
+	public void postGrades(String gradesName, String gradesBody) {
+		announcements.add(gradesName);
+		String[] placeholders = new String[] {gradesName, gradesBody};
+		// do some logic here
+
+		notifyAllUsers(placeholders);
+	}
+
+	public void postAnnouncement(String announcementName, String announcementBody) {
+		announcements.add(announcementName);
+		String[] placeholders = new String[] {announcementName, announcementBody};
+		// do some logic here
+
+		notifyAllUsers(placeholders);
+	}
+
 	
 	// AddExam, PostGrades, PostAnnouncement  will be the same 
 
 	private void notifyAllUsers(String[] placeholders) {
 		// notify users by email
 		//message type
-		TaskAddedEmailMessage msg = new TaskAddedEmailMessage();
-		String notification = msg.prepareMessage(placeholders);
+		TaskAddedEmailMessage msgEmail = new TaskAddedEmailMessage();
+		String notificationByEmail = msgEmail.prepareMessage(placeholders);
+
+		// notify users by sms
+		//message type
+		TaskAddedMobileMessage msgSms = new TaskAddedMobileMessage();
+		String notificationBySms = msgSms.prepareMessage(placeholders);
 		
 		// open connection for Email gateway and do some configurations to the object
 		//method
 		EmailGateway emailGateway = new EmailGateway();
+		// open connection for SMS gateway and do some configurations to the object
+		//method
+		SMSGateway smsGateway = new SMSGateway();
 		
 		
 		for (Professor professor : professorsForEmailNotification) {
-			professor.notifyProfessor(notification);
-			emailGateway.sendMessage(notification, professor.getEmail());
+			professor.notifyProfessor(notificationByEmail);
+			emailGateway.sendMessage(notificationByEmail, professor.getEmail());
 		}
 		
 		for (TA ta : TAsForEmailNotification) {
-			ta.notifyTA(notification);
-			emailGateway.sendMessage(notification, ta.getEmail());
+			ta.notifyTA(notificationByEmail);
+			emailGateway.sendMessage(notificationByEmail, ta.getEmail());
 		}
 		
+		for (Student student : studentsForEmailNotification) {
+			student.notifyStudent(notificationByEmail);
+			emailGateway.sendMessage(notificationByEmail, student.getEmail());
+		}
+
+
+		for (Professor professor : professorsForSMSNotification) {
+			professor.notifyProfessor(notificationBySms);
+			smsGateway.sendMessage(notificationBySms, professor.getPhoneNumber());
+		}
+
+		for (TA ta : TAsForSMSNotification) {
+			ta.notifyTA(notificationBySms);
+			smsGateway.sendMessage(notificationBySms, ta.getPhoneNumber());
+		}
+
 		for (Student student : studentsForSMSNotification) {
-			student.notifyStudent(notification);
-			emailGateway.sendMessage(notification, student.getEmail());
+			student.notifyStudent(notificationBySms);
+			smsGateway.sendMessage(notificationBySms, student.getPhoneNumber());
 		}
 	}
 	
