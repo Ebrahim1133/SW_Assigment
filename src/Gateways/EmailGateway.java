@@ -3,6 +3,7 @@ package Gateways;
 import Messages.DailyNewsEmailMessage;
 import Messages.GradesAnnouncementEmailMessage;
 import Messages.TaskAddedEmailMessage;
+import Users.Professor;
 
 public class EmailGateway {
 	
@@ -13,7 +14,9 @@ public class EmailGateway {
 			DailyNewsEmailMessage dailyNewsEmailMessage = (DailyNewsEmailMessage) message;
 			
 			dailyNewsEmailMessage.prepareMessage(placeHolders);
-			
+
+
+
 			// some code to send message
 		}
 		

@@ -1,6 +1,6 @@
 package Users;
 
-public class TA {
+public class TA extends CourseObserver {
 	String name;
 	String department;
 	String email;
@@ -52,9 +52,10 @@ public class TA {
 		this.department = department;
 	}
 	
-	public void notifyTA(String message) {
-		// do some stuff
-		
+
+
+	@Override
+	public void notify(String message) {
+		System.out.println(message);
 	}
-	
 }

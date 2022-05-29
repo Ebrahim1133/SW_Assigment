@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Observer;
 
 import Gateways.EmailGateway;
 import Gateways.SMSGateway;
@@ -15,7 +16,8 @@ public class Course {
 	ArrayList<String> announcements;
 	ArrayList<String> exams;
 	ArrayList<String> grades;
-	
+
+	ArrayList<Observer> ObserverList;
 	ArrayList<Professor> professorsForEmailNotification;
 	ArrayList<Professor> professorsForSMSNotification;
 	
@@ -24,7 +26,8 @@ public class Course {
 	
 	ArrayList<Student> studentsForEmailNotification;
 	ArrayList<Student> studentsForSMSNotification;
-	
+
+	public static Course instance ;
 	public Course(String name, String code) {
 		super();
 		this.name = name;
@@ -42,6 +45,9 @@ public class Course {
 		
 		studentsForEmailNotification = new ArrayList<Student>();
 		studentsForSMSNotification = new ArrayList<Student>();
+	}
+	public static Course getInstance(){
+		return instance;
 	}
 
 	public String getName() {
@@ -96,6 +102,8 @@ public class Course {
 
 	public void AddExam(String examName, String examBody) {
 		announcements.add(examName);
+		exams.add(examBody);
+
 		String[] placeholders = new String[] {examName, examBody};
 		// do some logic here
 
@@ -104,6 +112,7 @@ public class Course {
 
 	public void postGrades(String gradesName, String gradesBody) {
 		announcements.add(gradesName);
+		grades.add(gradesBody);
 		String[] placeholders = new String[] {gradesName, gradesBody};
 		// do some logic here
 
@@ -127,6 +136,7 @@ public class Course {
 		TaskAddedEmailMessage msgEmail = new TaskAddedEmailMessage();
 		String notificationByEmail = msgEmail.prepareMessage(placeholders);
 
+
 		// notify users by sms
 		//message type
 		TaskAddedMobileMessage msgSms = new TaskAddedMobileMessage();
@@ -138,41 +148,52 @@ public class Course {
 		// open connection for SMS gateway and do some configurations to the object
 		//method
 		SMSGateway smsGateway = new SMSGateway();
-		
-		
-		for (Professor professor : professorsForEmailNotification) {
-			professor.notifyProfessor(notificationByEmail);
-			emailGateway.sendMessage(notificationByEmail, professor.getEmail());
-		}
-		
-		for (TA ta : TAsForEmailNotification) {
-			ta.notifyTA(notificationByEmail);
-			emailGateway.sendMessage(notificationByEmail, ta.getEmail());
-		}
-		
-		for (Student student : studentsForEmailNotification) {
-			student.notifyStudent(notificationByEmail);
-			emailGateway.sendMessage(notificationByEmail, student.getEmail());
-		}
+
+		for (Observer observer : ObserverList) {
 
 
-		for (Professor professor : professorsForSMSNotification) {
-			professor.notifyProfessor(notificationBySms);
-			smsGateway.sendMessage(notificationBySms, professor.getPhoneNumber());
-		}
+			for (Professor professor : professorsForEmailNotification) {
+				professor.notify(notificationByEmail);
+				emailGateway.sendMessage(notificationByEmail, professor.getEmail());
+			}
 
-		for (TA ta : TAsForSMSNotification) {
-			ta.notifyTA(notificationBySms);
-			smsGateway.sendMessage(notificationBySms, ta.getPhoneNumber());
-		}
+			for (TA ta : TAsForEmailNotification) {
+				ta.notify(notificationByEmail);
+				emailGateway.sendMessage(notificationByEmail, ta.getEmail());
+			}
 
-		for (Student student : studentsForSMSNotification) {
-			student.notifyStudent(notificationBySms);
-			smsGateway.sendMessage(notificationBySms, student.getPhoneNumber());
+			for (Student student : studentsForEmailNotification) {
+				student.notify(notificationByEmail);
+				emailGateway.sendMessage(notificationByEmail, student.getEmail());
+			}
+
+
+			for (Professor professor : professorsForSMSNotification) {
+				professor.notify(notificationBySms);
+				smsGateway.sendMessage(notificationBySms, professor.getPhoneNumber());
+			}
+
+			for (TA ta : TAsForSMSNotification) {
+				ta.notify(notificationBySms);
+				smsGateway.sendMessage(notificationBySms, ta.getPhoneNumber());
+			}
+
+			for (Student student : studentsForSMSNotification) {
+				student.notify(notificationBySms);
+				smsGateway.sendMessage(notificationBySms, student.getPhoneNumber());
+			}
 		}
 	}
-	
-	
-	
-	
+
+
+
+	public void attach(Observer observer){
+		ObserverList.add(observer);
+	}
+
+
+
+
+
+
 }

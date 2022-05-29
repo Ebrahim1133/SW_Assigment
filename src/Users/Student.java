@@ -1,6 +1,6 @@
 package Users;
 
-public class Student {
+public class Student extends CourseObserver {
 	String name;
 	int Id;
 	String email;
@@ -53,8 +53,10 @@ public class Student {
 	}
 	
 	
-	public void notifyStudent(String message) {
-		// do some stuff
+
+
+	@Override
+	public void notify(String message) {
+		System.out.println(message);
 	}
-	
 }
