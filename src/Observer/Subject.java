@@ -6,7 +6,8 @@ import Observer.Users.TA;
 
 public interface Subject {
 
-
+    void subscribeEmail(Observer observer);
+    void subscribeSms(Observer observer);
     void notifyAllUsers(String[] placeholders);
 
 

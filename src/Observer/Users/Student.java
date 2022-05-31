@@ -2,7 +2,7 @@ package Observer.Users;
 
 import Observer.Observer;
 
-public class Student implements Observer {
+public class Student extends AbstractUser implements Observer {
 	String name;
 	int Id;
 	String email;
@@ -10,12 +10,13 @@ public class Student implements Observer {
 	
 	
 	
-	public Student(String name, int id, String email, String phoneNumber) {
+	public Student(String name, int id, String email, String phoneNumber,int level) {
 		super();
 		this.name = name;
 		Id = id;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
+		this.level = level;
 	}
 
 
@@ -58,6 +59,11 @@ public class Student implements Observer {
 
 	@Override
 	public void notify(String message) {
-		System.out.println(message);
+		write(message);
+	}
+
+	@Override
+	protected void write(String message) {
+		System.out.println( "Dear Student "+message);
 	}
 }

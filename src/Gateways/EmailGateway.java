@@ -15,7 +15,6 @@ public class EmailGateway {
 			dailyNewsEmailMessage.prepareMessage(placeHolders);
 
 
-
 			// some code to send message
 		}
 		

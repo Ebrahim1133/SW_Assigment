@@ -4,7 +4,7 @@ import Observer.Observer;
 
 import java.sql.Date;
 
-public class Professor implements Observer {
+public class Professor  extends AbstractUser implements Observer{
 	String name;
 	String department;
 	Date hirringDate;
@@ -14,7 +14,7 @@ public class Professor implements Observer {
 	
 	
 	public Professor(String name, String department, Date hirringDate, String phDTopic, String email,
-			String phoneNumber) {
+			String phoneNumber,int level) {
 		super();
 		this.name = name;
 		this.department = department;
@@ -22,6 +22,7 @@ public class Professor implements Observer {
 		PhDTopic = phDTopic;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
+		this.level = level;
 	}
 	
 	
@@ -75,6 +76,17 @@ public class Professor implements Observer {
 
 	@Override
 	public void notify(String message) {
-		System.out.println(message);
+		write(message);
 	}
+
+
+	@Override
+	protected void write(String message) {
+
+
+		System.out.println("Dear Professor"+message);
+	}
+
+
+
 }

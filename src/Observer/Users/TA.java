@@ -3,7 +3,7 @@ package Observer.Users;
 import Observer.Observer;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
-public class TA implements Observer {
+public class TA extends AbstractUser implements Observer {
 	String name;
 	String department;
 	String email;
@@ -11,12 +11,13 @@ public class TA implements Observer {
 	
 	
 
-	public TA(String name, String department, String email, String phoneNumber) {
+	public TA(String name, String department, String email, String phoneNumber,int level) {
 		super();
 		this.name = name;
 		this.department = department;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
+		this.level =level;
 	}
 
 
@@ -59,6 +60,11 @@ public class TA implements Observer {
 
 	@Override
 	public void notify(String message) {
-		System.out.println(message);
+		write(message);
+	}
+
+	@Override
+	protected void write(String message) {
+		System.out.println( message);
 	}
 }

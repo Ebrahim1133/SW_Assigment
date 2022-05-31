@@ -5,7 +5,7 @@ public class TaskAddedMobileMessage {
 	public String prepareMessage(String placeHolders[]) {
 
 
-		return "Dear {x},New task added" +placeHolders[0]+"is due date "+ placeHolders[1]+ "is announced and you can find it at Mobile SMS";
+		return "Dear "+placeHolders[0]+"+"+"New task added" +placeHolders[1]+"is due date "+ placeHolders[2]+ "is announced and you can find it at Mobile SMS";
 	}
 	
 	
