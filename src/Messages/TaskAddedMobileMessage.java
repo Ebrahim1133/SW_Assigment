@@ -1,7 +1,5 @@
 package Messages;
 
-import Users.Professor;
-
 public class TaskAddedMobileMessage {
 
 	public String prepareMessage(String placeHolders[]) {

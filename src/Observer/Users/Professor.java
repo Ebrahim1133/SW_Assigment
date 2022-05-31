@@ -1,8 +1,10 @@
-package Users;
+package Observer.Users;
+
+import Observer.Observer;
 
 import java.sql.Date;
 
-public class Professor extends CourseObserver {
+public class Professor implements Observer {
 	String name;
 	String department;
 	Date hirringDate;
@@ -67,13 +69,12 @@ public class Professor extends CourseObserver {
 	public void setPhDTopic(String phDTopic) {
 		PhDTopic = phDTopic;
 	}
-	
-	
+
+
 
 
 	@Override
 	public void notify(String message) {
 		System.out.println(message);
-
 	}
 }

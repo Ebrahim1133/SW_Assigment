@@ -1,17 +1,20 @@
-package Users;
+package Observer.Users;
 
-public class Student extends CourseObserver {
+import Observer.Observer;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
+public class TA implements Observer {
 	String name;
-	int Id;
+	String department;
 	String email;
 	String phoneNumber;
 	
 	
-	
-	public Student(String name, int id, String email, String phoneNumber) {
+
+	public TA(String name, String department, String email, String phoneNumber) {
 		super();
 		this.name = name;
-		Id = id;
+		this.department = department;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}
@@ -44,15 +47,14 @@ public class Student extends CourseObserver {
 		this.name = name;
 	}
 
-	public int getId() {
-		return Id;
+	public String getDepartment() {
+		return department;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
-	
-	
+
 
 
 	@Override

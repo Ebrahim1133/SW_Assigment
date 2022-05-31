@@ -1,17 +1,19 @@
-package Users;
+package Observer.Users;
 
-public class TA extends CourseObserver {
+import Observer.Observer;
+
+public class Student implements Observer {
 	String name;
-	String department;
+	int Id;
 	String email;
 	String phoneNumber;
 	
 	
-
-	public TA(String name, String department, String email, String phoneNumber) {
+	
+	public Student(String name, int id, String email, String phoneNumber) {
 		super();
 		this.name = name;
-		this.department = department;
+		Id = id;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}
@@ -44,14 +46,14 @@ public class TA extends CourseObserver {
 		this.name = name;
 	}
 
-	public String getDepartment() {
-		return department;
+	public int getId() {
+		return Id;
 	}
 
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setId(int id) {
+		Id = id;
 	}
-	
+
 
 
 	@Override

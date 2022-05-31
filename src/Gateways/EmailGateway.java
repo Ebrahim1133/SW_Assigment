@@ -3,7 +3,6 @@ package Gateways;
 import Messages.DailyNewsEmailMessage;
 import Messages.GradesAnnouncementEmailMessage;
 import Messages.TaskAddedEmailMessage;
-import Users.Professor;
 
 public class EmailGateway {
 	
