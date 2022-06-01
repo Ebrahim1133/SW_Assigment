@@ -102,26 +102,22 @@ public class Course implements Subject {
         String notificationDailyBySms = qradeSms.prepareMessage(placeholders);
 
 
-        // open connection for Email gateway and do some configurations to the object
-        //method
-        EmailGateway emailGateway = new EmailGateway();
-        // open connection for SMS gateway and do some configurations to the object
-        //method
-        SMSGateway smsGateway = new SMSGateway();
+        GatewayProxy gatewayProxy = new GatewayProxy();
+
 
 
         for (Observer observer : observerEmailNotification) {
             observer.notify(notificationByEmail);
-            emailGateway.sendMessage(notificationByEmail, observer.getEmail());
-            emailGateway.sendMessage(notificationGradeByEmail, observer.getEmail());
-            emailGateway.sendMessage(notificationDailyByEmail, observer.getEmail());
+            gatewayProxy.sendMessage(new DailyNewsEmailMessage(),observer.getEmail());
+            gatewayProxy.sendMessage(new TaskAddedEmailMessage(),observer.getEmail());
+            gatewayProxy.sendMessage(new GradesAnnouncementEmailMessage(),observer.getEmail());
 
         }
         for (Observer observer : observerSMSNotification) {
             observer.notify(notificationBySms);
-            smsGateway.sendMessage(notificationBySms, observer.getPhoneNumber());
-            smsGateway.sendMessage(notificationGradeBySms, observer.getPhoneNumber());
-            smsGateway.sendMessage(notificationDailyBySms, observer.getPhoneNumber());
+            gatewayProxy.sendMessage(new DailyNewsMobileMessage(),observer.getPhoneNumber());
+            gatewayProxy.sendMessage(new TaskAddedMobileMessage(),observer.getPhoneNumber());
+            gatewayProxy.sendMessage(new GradesAnnouncementMobileMessage(),observer.getPhoneNumber());
 
         }
 

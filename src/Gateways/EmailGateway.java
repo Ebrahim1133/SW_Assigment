@@ -16,7 +16,7 @@ public class EmailGateway implements GatewayInterfasceProxy {
     public void sendMessage(Object message, String user) {
         String[] placeHolders = new String[] {};
         if(message instanceof DailyNewsEmailMessage) {
-            System.out.println("hello");
+
             makeFactory.create(new EmailGateway()).getDailyNews(message);
 
         }

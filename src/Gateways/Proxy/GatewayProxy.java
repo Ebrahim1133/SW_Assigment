@@ -13,7 +13,7 @@ public class GatewayProxy implements GatewayInterfasceProxy{
             SMSGateway smsGateway = new SMSGateway();
             // set some place holders here
         if (message instanceof TaskAddedEmailMessage ||message instanceof GradesAnnouncementEmailMessage || message instanceof DailyNewsEmailMessage){
-            System.out.println("hello");
+
             emailGateway.sendMessage(message,user);
         }
         else if (message instanceof TaskAddedMobileMessage ||message instanceof GradesAnnouncementMobileMessage || message instanceof DailyNewsMobileMessage){
