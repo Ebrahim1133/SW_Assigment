@@ -1,6 +1,8 @@
-package Messages;
+package AbstractFactoryPattern.Messages;
 
-public class GradesAnnouncementEmailMessage {
+import AbstractFactoryPattern.Messages.AbstractFactory.GradeAnnouncement;
+
+public class GradesAnnouncementEmailMessage implements GradeAnnouncement {
 
 	public String prepareMessage(String placeHolders[]) {
 		// code to replace place holders of this type

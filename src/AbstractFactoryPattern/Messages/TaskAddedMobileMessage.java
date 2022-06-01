@@ -1,6 +1,8 @@
-package Messages;
+package AbstractFactoryPattern.Messages;
 
-public class TaskAddedMobileMessage {
+import AbstractFactoryPattern.Messages.AbstractFactory.TaskAdded;
+
+public class TaskAddedMobileMessage implements TaskAdded {
 
 	public String prepareMessage(String placeHolders[]) {
 

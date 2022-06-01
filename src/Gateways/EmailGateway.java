@@ -1,38 +1,37 @@
 package Gateways;
 
-import Messages.DailyNewsEmailMessage;
-import Messages.GradesAnnouncementEmailMessage;
-import Messages.TaskAddedEmailMessage;
 
-public class EmailGateway {
-	
-	public void sendMessage(Object message, String user) {
-		String[] placeHolders = new String[] {}; // set some place holders here 
-		
-		if(message instanceof DailyNewsEmailMessage) {
-			DailyNewsEmailMessage dailyNewsEmailMessage = (DailyNewsEmailMessage) message;
-			
-			dailyNewsEmailMessage.prepareMessage(placeHolders);
+import AbstractFactoryPattern.Messages.AbstractFactory.MakeFactory;
+import AbstractFactoryPattern.Messages.DailyNewsEmailMessage;
+import AbstractFactoryPattern.Messages.GradesAnnouncementEmailMessage;
+import AbstractFactoryPattern.Messages.TaskAddedEmailMessage;
+import Gateways.Proxy.GatewayInterfasceProxy;
+
+public class EmailGateway implements GatewayInterfasceProxy {
 
 
-			// some code to send message
-		}
-		
-		else if(message instanceof GradesAnnouncementEmailMessage) {
-			GradesAnnouncementEmailMessage announcementEmailMessage = (GradesAnnouncementEmailMessage) message;
-			
-			announcementEmailMessage.prepareMessage(placeHolders);
-			
-			// some code to send message
-		}
-		
-		else if(message instanceof TaskAddedEmailMessage) {
-			TaskAddedEmailMessage addedEmailMessage = (TaskAddedEmailMessage) message;
-			
-			addedEmailMessage.prepareMessage(placeHolders);
-			
-			// some code to send message by email to user
-		}
-		
-	}
+
+
+    @Override
+    public void sendMessage(Object message, String user) {
+        String[] placeHolders = new String[] {};
+        if(message instanceof DailyNewsEmailMessage) {
+            System.out.println("hello");
+            MakeFactory.create(new EmailGateway()).getDailyNews(message);
+
+        }
+
+        else if(message instanceof GradesAnnouncementEmailMessage) {
+            MakeFactory.create(new EmailGateway()).getGradeAnnouncement(message);
+
+        }
+
+        else if(message instanceof TaskAddedEmailMessage) {
+            MakeFactory.create(new EmailGateway()).getTaskAdded(message);
+        }
+    }
+
+
+
+
 }

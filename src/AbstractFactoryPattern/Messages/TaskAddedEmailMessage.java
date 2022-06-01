@@ -1,6 +1,8 @@
-package Messages;
+package AbstractFactoryPattern.Messages;
 
-public class TaskAddedEmailMessage {
+import AbstractFactoryPattern.Messages.AbstractFactory.TaskAdded;
+
+public class TaskAddedEmailMessage implements TaskAdded {
 
 	public String prepareMessage(String placeHolders[]) {
 		// code to replace place holders of this type

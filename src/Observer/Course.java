@@ -1,19 +1,15 @@
 package Observer;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 
 import Gateways.EmailGateway;
+import Gateways.Proxy.GatewayProxy;
 import Gateways.SMSGateway;
-import Messages.*;
+import AbstractFactoryPattern.Messages.*;
 import Observer.Users.Professor;
 import Observer.Users.Student;
-import Observer.Users.TA;
 
 public class Course implements Subject {
 
@@ -173,14 +169,15 @@ public class Course implements Subject {
 
         Professor professor = new Professor("ahmed", "sw", d2, "uhjh", "ahmed@gmail.com", "01166446464", 0);
         Student student = new Student("ahmed", 111, "gmail.com", "010100", 0);
-
+        String[] place = new String[]{"ahmed", "dgdfdsa", "dfaafafa"};
         Course course = new Course("SW", "111");
         course.subscribeEmail(professor);
         course.subscribeSms(professor);
         course.subscribeEmail(student);
         course.subscribeSms(student);
-        String[] place = new String[]{"ahmed", "dgdfdsa", "dfaafafa"};
-        course.notifyAllUsers(place);
+        GatewayProxy gatewayProxy = new GatewayProxy();
+        gatewayProxy.sendMessage(new DailyNewsEmailMessage(),professor.getEmail());
+//        course.notifyAllUsers(place);
     }
 //	 AddExam, PostGrades, PostAnnouncement  will be the same
 

@@ -1,37 +1,28 @@
 package Gateways;
 
-import Messages.DailyNewsMobileMessage;
-import Messages.GradesAnnouncementMobileMessage;
-import Messages.TaskAddedMobileMessage;
+import AbstractFactoryPattern.Messages.AbstractFactory.MakeFactory;
+import AbstractFactoryPattern.Messages.DailyNewsMobileMessage;
+import AbstractFactoryPattern.Messages.GradesAnnouncementMobileMessage;
+import AbstractFactoryPattern.Messages.TaskAddedMobileMessage;
+import Gateways.Proxy.GatewayInterfasceProxy;
 
-public class SMSGateway {
-	
+public class SMSGateway implements GatewayInterfasceProxy {
+
+	@Override
 	public void sendMessage(Object message, String user) {
-		String[] placeHolders = new String[] {}; // set some place holders here 
-		
+		String[] placeHolders = new String[] {};
 		if(message instanceof DailyNewsMobileMessage) {
-			DailyNewsMobileMessage msg = (DailyNewsMobileMessage) message;
-			
-			msg.prepareMessage(placeHolders);
-			
-			// some code to send message
+			MakeFactory.create(new SMSGateway()).getDailyNews(message);
 		}
-		
+
 		else if(message instanceof GradesAnnouncementMobileMessage) {
-			GradesAnnouncementMobileMessage msg = (GradesAnnouncementMobileMessage) message;
-			
-			msg.prepareMessage(placeHolders);
-			
-			// some code to send message
+			MakeFactory.create(new SMSGateway()).getGradeAnnouncement(message);
 		}
-		
+
 		else if(message instanceof TaskAddedMobileMessage) {
-			TaskAddedMobileMessage msg = (TaskAddedMobileMessage) message;
-			
-			msg.prepareMessage(placeHolders);
-			
-			// some code to send message to user
+			MakeFactory.create(new SMSGateway()).getTaskAdded(message);
 		}
-		
 	}
+
+
 }
