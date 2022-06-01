@@ -7,20 +7,20 @@ import AbstractFactoryPattern.Messages.TaskAddedMobileMessage;
 import Gateways.Proxy.GatewayInterfasceProxy;
 
 public class SMSGateway implements GatewayInterfasceProxy {
-
+MakeFactory makeFactory =  MakeFactory.getInstance();
 	@Override
 	public void sendMessage(Object message, String user) {
 		String[] placeHolders = new String[] {};
 		if(message instanceof DailyNewsMobileMessage) {
-			MakeFactory.create(new SMSGateway()).getDailyNews(message);
+			makeFactory.create(new SMSGateway()).getDailyNews(message);
 		}
 
 		else if(message instanceof GradesAnnouncementMobileMessage) {
-			MakeFactory.create(new SMSGateway()).getGradeAnnouncement(message);
+			makeFactory.create(new SMSGateway()).getGradeAnnouncement(message);
 		}
 
 		else if(message instanceof TaskAddedMobileMessage) {
-			MakeFactory.create(new SMSGateway()).getTaskAdded(message);
+			makeFactory.create(new SMSGateway()).getTaskAdded(message);
 		}
 	}
 

@@ -5,8 +5,20 @@ import Gateways.SMSGateway;
 
 public class MakeFactory {
 
+    private static MakeFactory instance;
 
-  public static AbstractMessagesFactory create(Object message) {
+    private MakeFactory() {
+
+    }
+
+    public static MakeFactory getInstance() {
+        if (instance == null) {
+            instance = new MakeFactory();
+        }
+        return instance;
+    }
+
+    public  AbstractMessagesFactory create(Object message) {
 
         if (message instanceof EmailGateway) {
             return new EmailFactory();
@@ -14,8 +26,7 @@ public class MakeFactory {
 
             return new SmsFactory();
 
-        }
-        else {
+        } else {
             return null;
         }
 

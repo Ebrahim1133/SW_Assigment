@@ -177,7 +177,7 @@ public class Course implements Subject {
         course.subscribeSms(student);
         GatewayProxy gatewayProxy = new GatewayProxy();
         gatewayProxy.sendMessage(new DailyNewsEmailMessage(),professor.getEmail());
-//        course.notifyAllUsers(place);
+        course.notifyAllUsers(place);
     }
 //	 AddExam, PostGrades, PostAnnouncement  will be the same
 

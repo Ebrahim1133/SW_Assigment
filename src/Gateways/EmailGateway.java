@@ -9,7 +9,7 @@ import Gateways.Proxy.GatewayInterfasceProxy;
 
 public class EmailGateway implements GatewayInterfasceProxy {
 
-
+    MakeFactory makeFactory =  MakeFactory.getInstance();
 
 
     @Override
@@ -17,17 +17,17 @@ public class EmailGateway implements GatewayInterfasceProxy {
         String[] placeHolders = new String[] {};
         if(message instanceof DailyNewsEmailMessage) {
             System.out.println("hello");
-            MakeFactory.create(new EmailGateway()).getDailyNews(message);
+            makeFactory.create(new EmailGateway()).getDailyNews(message);
 
         }
 
         else if(message instanceof GradesAnnouncementEmailMessage) {
-            MakeFactory.create(new EmailGateway()).getGradeAnnouncement(message);
+            makeFactory.create(new EmailGateway()).getGradeAnnouncement(message);
 
         }
 
         else if(message instanceof TaskAddedEmailMessage) {
-            MakeFactory.create(new EmailGateway()).getTaskAdded(message);
+            makeFactory.create(new EmailGateway()).getTaskAdded(message);
         }
     }
 
