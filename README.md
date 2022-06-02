@@ -9,4 +9,4 @@ a new feature that allows the system to notify users of critical information.</p
 
 <h2> UML Class Diagram </h2>
 
-![ScreenShot](url)
+![ScreenShot](https://github.com/Ebrahim1133/SW_Assigment/blob/master/FinalNotifications.png)
