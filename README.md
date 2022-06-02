@@ -4,3 +4,9 @@
 
 <p>As part of applying design patterns process for an e-learning platform such as Blackboard, you are requested to add 
 a new feature that allows the system to notify users of critical information.</p>
+
+
+
+<h2> UML Class Diagram </h2>
+
+![ScreenShot](url)
