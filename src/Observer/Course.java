@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 
+import AbstractFactoryPattern.Messages.AbstractFactory.MakeFactory;
 import Gateways.EmailGateway;
 import Gateways.Proxy.GatewayProxy;
 import Gateways.SMSGateway;
@@ -12,7 +13,7 @@ import Observer.Users.Professor;
 import Observer.Users.Student;
 
 public class Course implements Subject {
-
+    MakeFactory makeFactory =  MakeFactory.getInstance();
     String name;
     String code;
     ArrayList<String> announcements;
@@ -76,10 +77,6 @@ public class Course implements Subject {
         //message type
         TaskAddedEmailMessage msgEmail = new TaskAddedEmailMessage();
         String notificationByEmail = msgEmail.prepareMessage(placeholders);
-
-
-        // notify users by sms
-        //message type
         TaskAddedMobileMessage msgSms = new TaskAddedMobileMessage();
         String notificationBySms = msgSms.prepareMessage(placeholders);
 
@@ -100,6 +97,16 @@ public class Course implements Subject {
         //message type
         DailyNewsMobileMessage dailySms = new DailyNewsMobileMessage();
         String notificationDailyBySms = qradeSms.prepareMessage(placeholders);
+
+        makeFactory.create(new EmailGateway()).getDailyNews(dailyEmail);
+
+        makeFactory.create(new EmailGateway()).getGradeAnnouncement(qradeEmail);
+        makeFactory.create(new EmailGateway()).getTaskAdded(msgEmail);
+        // notify users by sms
+        //message type
+        makeFactory.create(new SMSGateway()).getDailyNews(dailySms);
+        makeFactory.create(new SMSGateway()).getGradeAnnouncement(qradeSms);
+        makeFactory.create(new SMSGateway()).getTaskAdded(msgSms);
 
 
         GatewayProxy gatewayProxy = new GatewayProxy();
