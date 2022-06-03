@@ -10,11 +10,17 @@ a new feature that allows the system to notify users of critical information.</p
 
 <p>
 1-Observer pattern in course class and users package 
+  <br>
 2-CoR pattern in users package 
+    <br>
 3-strategy pattern in users package
+    <br>
 4-AbstractFactory pattern in massages package
+    <br>
 5-singlton pattern in massages package
+    <br>
 6-proxy pattern in gateway packages
+    <br>
 </p>
 
 
