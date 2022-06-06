@@ -9,17 +9,17 @@ a new feature that allows the system to notify users of critical information.</p
 <h2> Solution #1 </h2>
 
 <p>
-1-Observer pattern in course class and users package 
+1-Observer pattern in Course class and Users package 
   <br>
-2-CoR pattern in users package 
+2-CoR pattern in Users package 
     <br>
-3-strategy pattern in users package
+3-strategy pattern in Users package
     <br>
-4-AbstractFactory pattern in massages package
+4-AbstractFactory pattern in Massages package
     <br>
-5-singlton pattern in massages package
+5-singlton pattern in Gatways package
     <br>
-6-proxy pattern in gateway packages
+6-proxy pattern in Gatways package
     <br>
 </p>
 
